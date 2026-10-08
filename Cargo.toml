@@ -2,10 +2,13 @@
 name = "dannesk-xrpl-codec"
 version = "0.1.0"
 edition = "2024"
+rust-version = "1.85"
 license = "MIT"
 description = "XRP Ledger binary encoding"
-repository = "https://github.com/Dannesk/app"
-publish = false 
+repository = "https://github.com/Dannesk/dannesk-xrpl-codec"
+keywords = ["xrpl", "xrp", "codec", "serialization", "x-address"]
+categories = ["encoding", "cryptography::cryptocurrencies"]
+publish = false  # until the first release on crates.io
 
 [dependencies]
 sha2 = "0.11.0"

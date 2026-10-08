@@ -1,0 +1,34 @@
+# cargo-deny: what a change may bring into this crate's dependency graph.
+#
+# .github/workflows/ci.yml runs `cargo deny check sources bans licenses` on
+# every pull request and every push to main, and any finding fails the run.
+# Advisories are checked in a step of their own that reports and never fails.
+# With no targets listed, the graph holds every platform's dependencies: a
+# library is built wherever its users build it.
+# Reference: https://embarkstudios.github.io/cargo-deny/
+
+[advisories]
+# RustSec. Unmaintained and unsound crates are reported anywhere in the graph,
+# not only among our direct dependencies. An advisory can land on a crate long
+# after it entered the lock, so CI reports these without failing (ci.yml).
+unmaintained = "all"
+unsound = "all"
+yanked = "deny"
+
+[licenses]
+# The crate is MIT, so everything it brings in must be under a permissive
+# licence. A crate under any other licence fails the check until that licence
+# is added here on purpose.
+allow = [
+    "MIT",
+    "Apache-2.0",
+]
+
+[bans]
+# Two versions of one crate are the upstream crates' concern, not a finding.
+multiple-versions = "allow"
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]
